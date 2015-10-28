@@ -4,27 +4,69 @@ local scene = composer.newScene()
 pageNum = 1
 
     spriteOptions = {   
-        height = 205, 
-        width = 192, 
-        numFrames = 10, 
+        height = 820, 
+        width = 768,
+        sheetContentWidth=1536,
+        sheetContentHeight=1640,
+        numFrames = 4, 
     }
-    mySheet = graphics.newImageSheet("images/burlao.png", spriteOptions) 
+    mySheet1 = graphics.newImageSheet("images/burlao1.png", spriteOptions) 
+    mySheet2 = graphics.newImageSheet("images/burlao2.png", spriteOptions) 
+    mySheet3 = graphics.newImageSheet("images/burlao3.png", spriteOptions) 
+
     sequenceData = {
-        {name = "parado", start = 1, count = 1, time = 500},
-        {name = "bailoteo", start = 2, count = 9, time = 800, loopCount = 0, loopDirection = "bounce"}, 
+        {name = "parado", start = 1, sheet = mySheet1, count = 1, time = 500},
+        {name = "bailoteo1", start = 2, sheet = mySheet1, count = 3, time = 300, loopCount = 1}, 
+        {name = "bailoteo2", start = 1, sheet = mySheet2, count = 4, time = 400, loopCount = 1},
+        {name = "bailoteo3", start = 1, sheet = mySheet3, count = 2, time = 200, loopCount = 1},
+
+        {name = "bailoteo1R", frames = {4,3,2}, sheet = mySheet1, time = 300, loopCount = 1}, 
+        {name = "bailoteo2R", frames = {4,3,2,1}, sheet = mySheet2, count = 4, time = 400, loopCount = 1},
+        {name = "bailoteo3R", frames = {2,1}, sheet = mySheet3, time = 200, loopCount = 1},
     }   
+
+function swapSheet5()
+        personaje:setSequence( "bailoteo1R" )
+        personaje:play()
+        tmrSheet5=timer.performWithDelay( 300, swapSheet )
+end
+
+function swapSheet4()
+        personaje:setSequence( "bailoteo2R" )
+        personaje:play()
+        tmrSheet4=timer.performWithDelay( 400, swapSheet5 )
+end
+
+function swapSheet3()
+        personaje:setSequence( "bailoteo3R" )
+        personaje:play()
+        tmrSheet3=timer.performWithDelay( 200, swapSheet4 )
+end
+
+function swapSheet2()
+        personaje:setSequence( "bailoteo3" )
+        personaje:play()
+        tmrSheet2=timer.performWithDelay( 200, swapSheet3 )
+end
+
+    function swapSheet()
+        personaje:setSequence( "bailoteo2" )
+        personaje:play()
+        tmrSheet=timer.performWithDelay( 400, swapSheet2 )
+end
+
 
 
 function scene:create( event )
 
     local group = self.view
 
-    --bk = display.newImage("images/bk.png",cx,cy )
-    personaje = display.newSprite(mySheet, sequenceData)
+    bk = display.newImage("images/bk.png",cx,cy )
+    personaje = display.newSprite(mySheet1, sequenceData)
 	personaje:setSequence("parado")
-	personaje.x = cx
-	personaje.y = cy-210
-	personaje:scale(4,4)
+	personaje.x = cx+50
+	personaje.y = cy-182
+	
 	
    
     
