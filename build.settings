@@ -23,6 +23,10 @@ settings =
     ["CoronaProvider.analytics.flurry"] = {publisherId = "com.coronalabs"},
     ["CoronaProvider.ads.vungle"] = {publisherId = "com.vungle"},
     ["CoronaProvider.analytics.flurry"] = {publisherId = "com.coronalabs"},
+            ["CoronaProvider.native.popup.social"] =
+        {
+            publisherId = "com.coronalabs"
+        },
 
   },  
 }

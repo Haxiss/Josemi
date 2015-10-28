@@ -54,6 +54,38 @@ end
         tmrSheet=timer.performWithDelay( 400, swapSheet2 )
 end
 
+-- Executed upon touching and releasing the button created below
+function onShareButtonReleased( event )
+    local serviceName = event.target.id
+    local isAvailable = native.canShowPopup( "social", serviceName )
+
+    -- If it is possible to show the popup
+    if isAvailable then
+        local listener = {}
+        function listener:popup( event )
+            print( "name(" .. event.name .. ") type(" .. event.type .. ") action(" .. tostring(event.action) .. ") limitReached(" .. tostring(event.limitReached) .. ")" )          
+        end
+
+        -- Show the popup
+        native.showPopup( "social",
+        {
+            service = serviceName, -- The service key is ignored on Android.
+            message = "Únete a la pandilla de los Burlaos con la app de Sonidos. Descarga GRATIS:",
+            listener = listener,
+            image = 
+            {
+                { filename = "images/burlao1.png", baseDir = system.ResourceDirectory },
+            },
+            
+            url = 
+            { 
+                "http://www.burlaos.com",
+            }
+        })
+    end
+end
+
+
 
 
 function scene:create( event )
@@ -65,10 +97,7 @@ function scene:create( event )
     personaje:setSequence("parado")
     personaje.x = leftMarg+460
     personaje.y = bottomMarg-899
-	
-	
-   
-    
+	   
     composer.gotoScene( "scripts.sonidos1" )
 
     local function handleArrow1Event( event )
@@ -142,8 +171,7 @@ function scene:create( event )
 
     -- Create the widget
      arrow2 = widget.newButton
-    {
-        
+    {   
         defaultFile = "images/arrow1.png",
         overFile = "images/arrow2.png",
         onEvent = handleArrow2Event
@@ -153,6 +181,15 @@ function scene:create( event )
     arrow2:scale(-0.6,0.6)
    
     arrow2.isVisible = false
+
+    local shareButton = widget.newButton{
+        id="share",
+        defaultFile = "images/arrow1.png",
+        overFile = "images/arrow2.png",
+        onRelease = onShareButtonReleased
+    }
+    shareButton.x = rightMarg - 100
+    shareButton.y = topMarg + 50
     --rect = display.newRect( group, cx, bottomMarg-250, display.contentWidth, 500 )
 end-- "scene:create()"
 
