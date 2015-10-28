@@ -161,15 +161,14 @@ function createPage(numSound, groupName)
 
     rect = display.newImageRect(group,"images/rect.png", display.contentWidth, 604 )
     rect.x, rect.y = cx, bottomMarg-300
- 
     
     pageMax = 6
     
     numPagesText = display.newText(groupName,  pageNum.."/"..pageMax, cx, bottomMarg-560, font, 60 )
     numPagesText:setFillColor( 0,0,0 )
+
     for i=1, 8 do
         
-
         if i < 5 then 
             btnX = display.contentWidth/4*i-100
             btnY = bottomMarg-400
@@ -180,7 +179,6 @@ function createPage(numSound, groupName)
 
         text[i] = display.newText( groupName, textTable[numSound], btnX, btnY+110, font, fontSize )
         text[i]:setFillColor( 1,1,1 )
-
         
         if numSound>= 1 and numSound<9 then 
             button[i] = display.newSprite( buttonSheet1, sequenceDataBtn )
@@ -220,34 +218,57 @@ function createPage(numSound, groupName)
                 cleanTimers()
                 tmrSwapSprite=timer.performWithDelay( 600, swapSheet )
                 personaje:play()
-                
+                numBtn=numBtn+1
+                if numBtn>10 then
+                    ads:setCurrentProvider( "vungle" )
+                    ads.show("interstitial")
+                    numBtn=0
+                end
+                print (numBtn)
                 sonidoChannel= audio.play(soundTable[button[i].id], {onComplete=soundListener})
             end
         end
         button[i]:addEventListener("touch",buttonTouch)
         numSound = numSound + 1
             
-        end
+    end
+end
+
+function cleanScene(numSound)
+    currScene = composer.getSceneName( "current" )
+    composer.removeScene( currScene )
+end
+
+local t = loadTable( "data.json" )
+
+--Página Bloqueado
+
+function rectBlockTouch(event)
+
+
+    return true
+end
+
+function blockedPage()
+    currScene = composer.getSceneName( "current" )
+    
+    if t.lock1 and (currScene=="scripts.sonidos3" or currScene=="scripts.sonidos4" or currScene=="scripts.sonidos5") then
+        ads:setCurrentProvider( "vungle" )
+
+        rectBlock = display.newRect( group, cx, bottomMarg-300, display.contentWidth, 604 )
+        rectBlock:setFillColor( 0,0,0,0.6 )
+    
+        rectBlock:addEventListener("touch", rectBlockTouch)
+
     end
 
-    function cleanScene(numSound)
-        currScene = composer.getSceneName( "current" )
-        composer.removeScene( currScene )
-        end
+    if t.lock2 and currScene=="scripts.sonidos6" then
+        ads:setCurrentProvider( "vungle" )
 
-    --Página Bloqueado
-
-    function rectBlockTouch(event)
-                if ( event.phase == "began" )  then
-                print("ldodood")
-                elseif ( event.phase == "ended" )  then
-                   
-                end
-                return true
-            end
-            function blockedPage()
-    rectBlock = display.newRect( group, cx, bottomMarg-300, display.contentWidth, 604 )
-    rectBlock:setFillColor( 0,0,0,0.6 )
+        rectBlock = display.newRect( group, cx, bottomMarg-300, display.contentWidth, 604 )
+        rectBlock:setFillColor( 0,0,0,0.6 )
     
-    rectBlock:addEventListener("touch",rectBlockTouch)
+        rectBlock:addEventListener("touch", rectBlockTouch)
+    end
+
 end

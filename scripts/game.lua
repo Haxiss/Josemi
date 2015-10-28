@@ -1,6 +1,5 @@
 local scene = composer.newScene()
 
-
 pageNum = 1
 
     spriteOptions = {   

@@ -11,7 +11,7 @@ function scene:create( event )
     
 
     createPage(41, group)
-    --blockedPage()
+    blockedPage()
 
 end-- "scene:create()"
 

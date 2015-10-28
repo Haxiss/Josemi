@@ -3,20 +3,15 @@ local scene = composer.newScene()
 
 local soundPlaying = false
 
-
 function scene:create( event )
 
     group = self.view
 
-    
-
     createPage(17, group)
-    --blockedPage()
 
+    blockedPage()
 
 end-- "scene:create()"
-
-
 
 function scene:show( event )
 
@@ -26,20 +21,13 @@ function scene:show( event )
     if ( phase == "will" ) then
         -- Called when the scene is still off screen (but is about to come on screen).
 
-
-
-
     elseif ( phase == "did" ) then
         -- Called when the scene is now on screen.
         -- Insert code here to make the scene come alive.
         -- Example: start timers, begin animation, play audio, etc.
 
-
-
     end-- "scene:show()"
 end-- "scene:show()"
-
-
 
 function scene:hide( event )
 
@@ -57,8 +45,6 @@ function scene:hide( event )
     end-- "scene:hide()"
 end-- "scene:hide()"
 
-
-
 function scene:destroy( event )
 
     group = self.view
@@ -67,12 +53,9 @@ function scene:destroy( event )
     -- Insert code here to clean up the scene.
     -- Example: remove display objects, save state, etc.
 
-
 end-- "scene:destroy()"
 
-
 -- -------------------------------------------------------------------------------
-
 
 scene:addEventListener( "create", scene )
 scene:addEventListener( "show", scene )
