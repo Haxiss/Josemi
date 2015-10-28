@@ -129,6 +129,10 @@ sequenceDataBtn = {
 button={}
 text={}
 
+fontText = "PTS75F"
+fontTextSize = 40
+
+
 function soundListener()
     personaje:setSequence( "parado" )
     personaje:play()
@@ -164,7 +168,7 @@ function createPage(numSound, groupName)
     
     pageMax = 6
     
-    numPagesText = display.newText(groupName,  pageNum.."/"..pageMax, cx, bottomMarg-560, font, 60 )
+    numPagesText = display.newText(groupName,  pageNum.."/"..pageMax, cx, bottomMarg-560, fontText, 60 )
     numPagesText:setFillColor( 0,0,0 )
 
     for i=1, 8 do
@@ -177,7 +181,7 @@ function createPage(numSound, groupName)
             btnY = bottomMarg-150
         end
 
-        text[i] = display.newText( groupName, textTable[numSound], btnX, btnY+110, font, fontSize )
+        text[i] = display.newText( groupName, textTable[numSound], btnX, btnY+110, fontText, fontTextSize )
         text[i]:setFillColor( 1,1,1 )
         
         if numSound>= 1 and numSound<9 then 
@@ -265,11 +269,23 @@ function blockedPage()
 
         --ads:setCurrentProvider( "vungle" )
 
-        rectBlock = display.newRect( group, cx, bottomMarg-300, display.contentWidth, 604 )
-        rectBlock:setFillColor( 0,0,0,0.6 )
+        rectBlock = display.newImageRect( group, "images/rectBlocked.png", display.contentWidth, 604 )
+        rectBlock.x, rectBlock.y = cx, bottomMarg-300
+          local options = {
+            text = "Ver vídeo para desbloquear 24 sonidos más",
+            parent = group,
+            x = cx, 
+            y = bottomMarg-400, 
+            font = fontText,
+            fontSize = 60,
+            width= display.contentWidth-100,
+            align="center"
+            }
+
+         textBlocked = display.newText(options)
     
         rectBlock:addEventListener("touch", rectBlockTouch)
-
+        textBlocked = display.newText(options)
     end
 
     if t.lock1 and (currScene=="scripts.sonidos4" or currScene=="scripts.sonidos5") then
@@ -280,12 +296,31 @@ function blockedPage()
     end
 
     if t.lock2 and currScene=="scripts.sonidos6" then
+<<<<<<< HEAD
 
         --ads:setCurrentProvider( "vungle" )
 
         rectBlock = display.newRect( group, cx, bottomMarg-300, display.contentWidth, 604 )
         rectBlock:setFillColor( 0,0,0,0.6 )
     
+=======
+        ads:setCurrentProvider( "vungle" )
+        rectBlock = display.newImageRect( group, "images/rectBlocked2.png", display.contentWidth, 604 )
+        rectBlock.x, rectBlock.y = cx, bottomMarg-300
+          local options = {
+            text = "Desbloquea sonidos únicos de Josemi",
+            parent = group,
+            x = cx, 
+            y = bottomMarg-295, 
+            font = fontText,
+            fontSize = 60,
+            width= display.contentWidth-100,
+            align="center"
+            }
+            logos = display.newImage( group, "images/logos.png", cx+60,bottomMarg-260 )
+         textBlocked = display.newText(options)
+         
+>>>>>>> origin/master
         rectBlock:addEventListener("touch", rectBlockTouch)
     end
 

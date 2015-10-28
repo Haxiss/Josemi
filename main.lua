@@ -4,6 +4,7 @@ composer = require "composer"
 json = require "json" 
 widget = require "widget" 
 
+
 ads = require "ads"
 
 cx, cy = display.contentCenterX, display.contentCenterY
