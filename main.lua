@@ -1,4 +1,3 @@
-native.setProperty( "androidSystemUiVisibility", "immersiveSticky" )
 display.setStatusBar( display.HiddenStatusBar )
 
 composer = require "composer"
@@ -12,7 +11,7 @@ _W, _H  = display.contentWidth, display.contentHeight
 leftMarg, rightMarg = display.screenOriginX, display.contentWidth - display.screenOriginX
 topMarg, bottomMarg = display.screenOriginY, display.contentHeight - display.screenOriginY
 
-ads.init( "admob", "yourAppID", admobListener )
+ads.init( "admob", "ca-app-pub-1709584335667681/2756526250" )
 
 numBtn = 0
 
@@ -54,36 +53,31 @@ local t = loadTable( "data.json" )
 
 tables = require "tables"
 
-function vungleListener()
+function vungleListener(event)
+    print(event.type)
 
     currScene = composer.getSceneName( "current" )
 
-    if (event.type == "cachedAdAvailable" and (currScene~="sonidos1" or currScene~="sonidos2")) then
+    if event.type=="adView" and currScene=="scripts.sonidos3" then
+        rectBlock:removeSelf( )
+        local t = loadTable( "data.json" )
+        t.lock1 = false
+        saveTable(t, "data.json")
+    end
 
-        vungleBtn = widget.newButton{
-            textOnly = true,
-            label = "VIDEO",
-            onRelease = 
-                function () 
-                    ads.show("interstitial")
-                end
-            } 
-        vungleBtn.x, vungleBtn.y = cx, bottomMarg-300
-        group:insert(vungleBtn)
-
+    if event.type=="adView" and currScene=="scripts.sonidos6" then
+        rectBlock:removeSelf( )
+        local t = loadTable( "data.json" )
+        t.lock2 = false
+        saveTable(t, "data.json")
     end
 end
 
-if t.lock1==false and t.lock2==false then
-    ads.init( "vungle", "com.seja.liedetector", vungleListener )
-end
+local t = loadTable( "data.json" )
 
-function onSystemEvent( event )
-    if (event.type=="applicationSuspend") then
-        native.setProperty( "androidSystemUiVisibility", "immersiveSticky" )
-    end
+if t.lock1==true or t.lock2==true then
+    --ads.init( "vungle", "com.seja.liedetector", vungleListener )
+    --ads:setCurrentProvider( "vungle" )
 end
-
-Runtime:addEventListener( "system", onSystemEvent )
 
 composer.gotoScene("scripts.game")

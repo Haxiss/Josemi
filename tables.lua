@@ -220,8 +220,9 @@ function createPage(numSound, groupName)
                 personaje:play()
                 numBtn=numBtn+1
                 if numBtn>10 then
-                    ads:setCurrentProvider( "vungle" )
-                    ads.show("interstitial")
+                    --ads:setCurrentProvider( "admob" )
+                    --ads.show("interstitial", { testMode=true })
+                    --ads:setCurrentProvider( "vungle" )
                     numBtn=0
                 end
                 print (numBtn)
@@ -239,21 +240,30 @@ function cleanScene(numSound)
     composer.removeScene( currScene )
 end
 
-local t = loadTable( "data.json" )
-
 --Página Bloqueado
 
 function rectBlockTouch(event)
+    if event.phase =="ended" then
+        ads.show("incentivized")
+    end
 
+    return true
+end
+
+function rectBlockTouch2(event)
 
     return true
 end
 
 function blockedPage()
+
+    local t = loadTable( "data.json" )
+
     currScene = composer.getSceneName( "current" )
     
-    if t.lock1 and (currScene=="scripts.sonidos3" or currScene=="scripts.sonidos4" or currScene=="scripts.sonidos5") then
-        ads:setCurrentProvider( "vungle" )
+    if t.lock1 and (currScene=="scripts.sonidos3") then
+
+        --ads:setCurrentProvider( "vungle" )
 
         rectBlock = display.newRect( group, cx, bottomMarg-300, display.contentWidth, 604 )
         rectBlock:setFillColor( 0,0,0,0.6 )
@@ -262,8 +272,16 @@ function blockedPage()
 
     end
 
+    if t.lock1 and (currScene=="scripts.sonidos4" or currScene=="scripts.sonidos5") then
+        rectBlock = display.newRect( group, cx, bottomMarg-300, display.contentWidth, 604 )
+        rectBlock:setFillColor( 0,0,0,0.6 )
+
+        rectBlock:addEventListener("touch", rectBlockTouch2)
+    end
+
     if t.lock2 and currScene=="scripts.sonidos6" then
-        ads:setCurrentProvider( "vungle" )
+
+        --ads:setCurrentProvider( "vungle" )
 
         rectBlock = display.newRect( group, cx, bottomMarg-300, display.contentWidth, 604 )
         rectBlock:setFillColor( 0,0,0,0.6 )
