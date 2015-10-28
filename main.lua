@@ -3,14 +3,15 @@ display.setStatusBar( display.HiddenStatusBar )
 composer = require "composer"
 json = require "json" 
 widget = require "widget" 
-
-
+analytics = require "analytics" 
 ads = require "ads"
 
 cx, cy = display.contentCenterX, display.contentCenterY
 _W, _H  = display.contentWidth, display.contentHeight
 leftMarg, rightMarg = display.screenOriginX, display.contentWidth - display.screenOriginX
 topMarg, bottomMarg = display.screenOriginY, display.contentHeight - display.screenOriginY
+
+analytics.init( "6B985RT2R9NWPX88B76W" )
 
 ads.init( "admob", "ca-app-pub-1709584335667681/2756526250" )
 
@@ -53,7 +54,7 @@ local t = loadTable( "data.json" )
 	end
 
 tables = require "tables"
-
+--[[
 function vungleListener(event)
     print(event.type)
 
@@ -80,5 +81,7 @@ if t.lock1==true or t.lock2==true then
     --ads.init( "vungle", "com.seja.liedetector", vungleListener )
     --ads:setCurrentProvider( "vungle" )
 end
+
+]]
 
 composer.gotoScene("scripts.game")

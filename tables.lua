@@ -217,25 +217,27 @@ function createPage(numSound, groupName)
             elseif ( event.phase == "ended" )  then
                 soundPlaying = true
                 button[i]:setSequence("default")
-
                 personaje:setSequence( "bailoteo1" )
                 cleanTimers()
                 tmrSwapSprite=timer.performWithDelay( 600, swapSheet )
                 personaje:play()
-                numBtn=numBtn+1
-                if numBtn>10 then
+                if numBtn>15 then
                     --ads:setCurrentProvider( "admob" )
-                    --ads.show("interstitial", { testMode=true })
+                    ads.show("interstitial", { testMode=true })
                     --ads:setCurrentProvider( "vungle" )
-                    numBtn=0
+                    numBtn = 0
+                else 
+                    numBtn = numBtn + 1
                 end
-                print (numBtn)
+                print(numBtn)
+                print( textTable[button[i].id] )
+                analytics.logEvent(textTable[button[i].id])
                 sonidoChannel= audio.play(soundTable[button[i].id], {onComplete=soundListener})
             end
         end
         button[i]:addEventListener("touch",buttonTouch)
         numSound = numSound + 1
-            
+        
     end
 end
 
@@ -260,7 +262,7 @@ function rectBlockTouch2(event)
 end
 
 function blockedPage()
-
+--[[
     local t = loadTable( "data.json" )
 
     currScene = composer.getSceneName( "current" )
@@ -296,14 +298,12 @@ function blockedPage()
     end
 
     if t.lock2 and currScene=="scripts.sonidos6" then
-<<<<<<< HEAD
 
         --ads:setCurrentProvider( "vungle" )
 
         rectBlock = display.newRect( group, cx, bottomMarg-300, display.contentWidth, 604 )
         rectBlock:setFillColor( 0,0,0,0.6 )
     
-=======
         ads:setCurrentProvider( "vungle" )
         rectBlock = display.newImageRect( group, "images/rectBlocked2.png", display.contentWidth, 604 )
         rectBlock.x, rectBlock.y = cx, bottomMarg-300
@@ -320,8 +320,7 @@ function blockedPage()
             logos = display.newImage( group, "images/logos.png", cx+60,bottomMarg-260 )
          textBlocked = display.newText(options)
          
->>>>>>> origin/master
         rectBlock:addEventListener("touch", rectBlockTouch)
     end
-
+]]
 end

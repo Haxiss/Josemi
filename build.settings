@@ -19,9 +19,10 @@ settings =
   plugins =
   {
        
-    ["plugin.google.play.services"] = {publisherId = "com.coronalabs"},
+    ["plugin.google.play.services"] = {publisherId = "com.coronalabs", supportedPlatforms = { android=true }},
     ["CoronaProvider.analytics.flurry"] = {publisherId = "com.coronalabs"},
     ["CoronaProvider.ads.vungle"] = {publisherId = "com.vungle"},
+    ["CoronaProvider.analytics.flurry"] = {publisherId = "com.coronalabs"},
 
   },  
 }
