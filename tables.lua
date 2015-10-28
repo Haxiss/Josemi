@@ -133,6 +133,10 @@ function soundListener()
     personaje:setSequence( "parado" )
     personaje:play()
     soundPlaying = false
+    cleanTimers()
+end
+
+function cleanTimers()
     if tmrSheet then
         timer.cancel(tmrSheet)
     end
@@ -147,10 +151,11 @@ function soundListener()
     end
     if tmrSheet5 then
         timer.cancel(tmrSheet5)
+    end 
+    if tmrSwapSprite then
+        timer.cancel( tmrSwapSprite )
     end
-    
 end
-
 
 function createPage(numSound, groupName)
 
@@ -206,12 +211,14 @@ function createPage(numSound, groupName)
             if ( event.phase == "began" )  then
                 button[i]:setSequence("pressed")
                 audio.stop()
-                
+                tmrBtnDefault=timer.performWithDelay( 1000, function ( )button[i]:setSequence("default") end )
             elseif ( event.phase == "ended" )  then
                 soundPlaying = true
                 button[i]:setSequence("default")
+
                 personaje:setSequence( "bailoteo1" )
-                timer.performWithDelay( 600, swapSheet )
+                cleanTimers()
+                tmrSwapSprite=timer.performWithDelay( 600, swapSheet )
                 personaje:play()
                 
                 sonidoChannel= audio.play(soundTable[button[i].id], {onComplete=soundListener})
