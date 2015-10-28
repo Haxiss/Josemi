@@ -60,11 +60,11 @@ function scene:create( event )
 
     local group = self.view
 
-    bk = display.newImage("images/bk.png",cx,cy )
+    bk = display.newImage("images/bk.png",cx, bottomMarg-718)
     personaje = display.newSprite(mySheet1, sequenceData)
-	personaje:setSequence("parado")
-	personaje.x = cx+50
-	personaje.y = cy-182
+    personaje:setSequence("parado")
+    personaje.x = leftMarg+460
+    personaje.y = bottomMarg-899
 	
 	
    

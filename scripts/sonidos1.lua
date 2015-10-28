@@ -9,7 +9,7 @@ function scene:create( event )
     group = self.view
 
     createPage(1, group)
-    
+    blockedPage()
 
 end-- "scene:create()"
 
