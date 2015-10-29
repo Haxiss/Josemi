@@ -74,7 +74,7 @@ function onShareButtonReleased( event )
             listener = listener,
             image = 
             {
-                { filename = "images/burlao1.png", baseDir = system.ResourceDirectory },
+                { filename = "sounds/eresUnPayaso.ogg", baseDir = system.ResourceDirectory },
             },
             
             url = 
@@ -119,7 +119,8 @@ function scene:create( event )
                         elseif pageNum == 5 then
                             cleanScene(25)
                             composer.gotoScene( "scripts.sonidos5", {effect="slideLeft", time=700} )
-                            elseif pageNum == 6 then
+                            arrow1.isVisible = false
+                           elseif pageNum == 6 then
                                 cleanScene(33)
                                 composer.gotoScene( "scripts.sonidos6", {effect="slideLeft", time=700} )
                                 arrow1.isVisible = false
@@ -159,7 +160,8 @@ function scene:create( event )
                         elseif pageNum == 5 then
                             cleanScene(33)
                             composer.gotoScene( "scripts.sonidos4", {effect="slideRight", time=700} )
-                            elseif pageNum == 6 then
+                            arrow1.isVisible = true
+                          elseif pageNum == 6 then
                                 cleanScene(41)
                                 composer.gotoScene( "scripts.sonidos5", {effect="slideRight", time=700} )
                                 arrow1.isVisible = true

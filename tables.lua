@@ -166,7 +166,7 @@ function createPage(numSound, groupName)
     rect = display.newImageRect(group,"images/rect.png", display.contentWidth, 604 )
     rect.x, rect.y = cx, bottomMarg-300
     
-    pageMax = 6
+    pageMax = 5
     
     numPagesText = display.newText(groupName,  pageNum.."/"..pageMax, cx, bottomMarg-560, fontText, 60 )
     numPagesText:setFillColor( 0,0,0 )
