@@ -274,12 +274,12 @@ function blockedPage()
         rectBlock = display.newImageRect( group, "images/rectBlocked.png", display.contentWidth, 604 )
         rectBlock.x, rectBlock.y = cx, bottomMarg-300
           local options = {
-            text = "Ver vídeo para desbloquear 24 sonidos más",
+            text = "Comparte la app para desbloquear 16 sonidos más",
             parent = group,
             x = cx, 
             y = bottomMarg-400, 
             font = fontText,
-            fontSize = 60,
+            fontSize = 54,
             width= display.contentWidth-100,
             align="center"
             }
@@ -291,8 +291,8 @@ function blockedPage()
     end
 
     if t.lock1 and currScene=="scripts.sonidos5" then
-        rectBlock = display.newRect( group, cx, bottomMarg-300, display.contentWidth, 604 )
-        rectBlock:setFillColor( 0,0,0,0.6 )
+        rectBlock = display.newImageRect( group, "images/rectBlocked.png", display.contentWidth, 604 )
+        rectBlock.x, rectBlock.y = cx, bottomMarg-300
 
         rectBlock:addEventListener("touch", rectBlockTouch2)
     end
