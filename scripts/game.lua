@@ -55,7 +55,7 @@ end
 end
 
 -- Executed upon touching and releasing the button created below
-function onShareButtonReleased( event )
+local function onShareButtonReleased( event )
     local serviceName = event.target.id
     local isAvailable = native.canShowPopup( "social", serviceName )
 
@@ -74,21 +74,18 @@ function onShareButtonReleased( event )
             listener = listener,
             image = 
             {
-                { filename = "sounds/eresUnPayaso.ogg", baseDir = system.ResourceDirectory },
+                { filename = "images/burlao1.png", baseDir = system.ResourceDirectory },
             },
             
             url = { "http://www.burlaos.com", }
         })
-        timer.performWithDelay( 1500, function()
-            local t = loadTable( "data.json" )
+        local t = loadTable( "data.json" )
+        if t.lock1 then
             t.lock1 = false
             saveTable(t, "data.json")
-        end)
+        end
     end
 end
-
-
-
 
 function scene:create( event )
 
@@ -188,12 +185,14 @@ function scene:create( event )
 
     local shareButton = widget.newButton{
         id="share",
-        defaultFile = "images/arrow1.png",
-        overFile = "images/arrow2.png",
+        defaultFile = "images/share1.png",
+        overFile = "images/share2.png",
+        width = 283,
+        height = 87.5,
         onRelease = onShareButtonReleased
     }
-    shareButton.x = rightMarg - 100
-    shareButton.y = topMarg + 50
+    shareButton.x = rightMarg - 150
+    shareButton.y = topMarg + 55
     --rect = display.newRect( group, cx, bottomMarg-250, display.contentWidth, 500 )
 end-- "scene:create()"
 
