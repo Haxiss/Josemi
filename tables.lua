@@ -262,12 +262,12 @@ function rectBlockTouch2(event)
 end
 
 function blockedPage()
---[[
+
     local t = loadTable( "data.json" )
 
     currScene = composer.getSceneName( "current" )
     
-    if t.lock1 and (currScene=="scripts.sonidos3") then
+    if t.lock1 and (currScene=="scripts.sonidos4") then
 
         --ads:setCurrentProvider( "vungle" )
 
@@ -290,13 +290,13 @@ function blockedPage()
         textBlocked = display.newText(options)
     end
 
-    if t.lock1 and (currScene=="scripts.sonidos4" or currScene=="scripts.sonidos5") then
+    if t.lock1 and currScene=="scripts.sonidos5" then
         rectBlock = display.newRect( group, cx, bottomMarg-300, display.contentWidth, 604 )
         rectBlock:setFillColor( 0,0,0,0.6 )
 
         rectBlock:addEventListener("touch", rectBlockTouch2)
     end
-
+--[[
     if t.lock2 and currScene=="scripts.sonidos6" then
 
         --ads:setCurrentProvider( "vungle" )

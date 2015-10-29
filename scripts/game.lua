@@ -77,11 +77,13 @@ function onShareButtonReleased( event )
                 { filename = "sounds/eresUnPayaso.ogg", baseDir = system.ResourceDirectory },
             },
             
-            url = 
-            { 
-                "http://www.burlaos.com",
-            }
+            url = { "http://www.burlaos.com", }
         })
+        timer.performWithDelay( 1500, function()
+            local t = loadTable( "data.json" )
+            t.lock1 = false
+            saveTable(t, "data.json")
+        end)
     end
 end
 
