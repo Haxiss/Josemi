@@ -53,6 +53,8 @@ function scene:create( event )
     group:insert(playBtn)
     group:insert(adBtn)
 
+--intro = audio.loadSound("sounds/intro.ogg")
+--backgroundMusicChannel = audio.play( intro, { channel=1, loops=-1 } )
 
 end-- "scene:create()"
 

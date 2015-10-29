@@ -15,13 +15,13 @@ _W, _H  = display.contentWidth, display.contentHeight
 leftMarg, rightMarg = display.screenOriginX, display.contentWidth - display.screenOriginX
 topMarg, bottomMarg = display.screenOriginY, display.contentHeight - display.screenOriginY
 
-AdBuddiz.setAndroidPublisherKey("6c2b77ac-be31-488c-963c-93adf0c25988")
+AdBuddiz.setAndroidPublisherKey("e5d4253d-d5de-4a0e-87d4-85517edc7dfe")
 AdBuddiz.cacheAds()
 AdBuddiz.RewardedVideo_fetch()
 
 analytics.init( "6B985RT2R9NWPX88B76W" )
 
-ads.init( "admob", "ca-app-pub-1709584335667681/2756526250" )
+ads.init( "admob", "ca-app-pub-1709584335667681/1378802655" )
 
 numBtn = 0
 

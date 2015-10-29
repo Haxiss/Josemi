@@ -158,6 +158,7 @@ fontTextSize = 40
 function soundListener()
     personaje:setSequence( "parado" )
     personaje:play()
+    --audio.resume( intro )
     soundPlaying = false
     cleanTimers()
 end
@@ -234,7 +235,8 @@ function createPage(numSound, groupName)
         function buttonTouch(event)
             if ( event.phase == "began" )  then
                 button[i]:setSequence("pressed")
-                audio.stop()
+                audio.pause(backgroundMusicChannel)
+                audio.stop(sonidoChannel)
                 tmrBtnDefault=timer.performWithDelay( 1000, function ( )button[i]:setSequence("default") end )
             elseif ( event.phase == "ended" )  then
                 soundPlaying = true
@@ -254,7 +256,8 @@ function createPage(numSound, groupName)
                 print(numBtn)
                 print( textTable[button[i].id] )
                 analytics.logEvent(textTable[button[i].id])
-                sonidoChannel= audio.play(soundTable[button[i].id], {onComplete=soundListener})
+                audio.pause(backgroundMusicChannel)
+                sonidoChannel= audio.play(soundTable[button[i].id], { onComplete=soundListener})
             end
         end
         button[i]:addEventListener("touch",buttonTouch)

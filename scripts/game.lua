@@ -50,7 +50,7 @@ function onShareButtonReleased( event )
         native.showPopup( "social",
         {
             service = serviceName, -- The service key is ignored on Android.
-            message = "Sonidos Burlaos ¡La app que lo está petando en el barrio! Yo ya me la he descargado",
+            message = "Burlaos Sonidos ¡La app que lo está petando en el barrio! Yo ya me la he descargado",
             listener = listener,
             image = 
             {
