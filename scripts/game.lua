@@ -50,11 +50,11 @@ function onShareButtonReleased( event )
         native.showPopup( "social",
         {
             service = serviceName, -- The service key is ignored on Android.
-            message = "Únete a la pandilla de los Burlaos con la app de Sonidos. Descarga GRATIS:",
+            message = "Sonidos Burlaos ¡La app que lo está petando en el barrio! Yo ya me la he descargado",
             listener = listener,
             image = 
             {
-                { filename = "images/burlao1.png", baseDir = system.ResourceDirectory },
+                { filename = "images/promoBurlao2.png", baseDir = system.ResourceDirectory },
             },
             
             url = { "https://play.google.com/store/apps/details?id=com.seja.sonidosburlaos", }
@@ -111,7 +111,7 @@ function scene:create( event )
 
     arrow1.x, arrow1.y = rightMarg-80, bottomMarg-567
     arrow1:scale(0.6,0.6)
-    
+    backgroundGroup:insert(arrow1)
 
     local function handleArrow2Event( event )
 
@@ -152,7 +152,7 @@ function scene:create( event )
 
     arrow2.x, arrow2.y = leftMarg+80, bottomMarg-567
     arrow2:scale(-0.6,0.6)
-   
+    backgroundGroup:insert(arrow2)
     arrow2.isVisible = false
 
     local shareButton = widget.newButton{

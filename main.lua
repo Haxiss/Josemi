@@ -7,6 +7,9 @@ analytics = require "analytics"
 ads = require "ads"
 AdBuddiz = require "plugin.adbuddiz"
 
+blockedGroup = display.newGroup( )
+backgroundGroup = display.newGroup( )
+
 cx, cy = display.contentCenterX, display.contentCenterY
 _W, _H  = display.contentWidth, display.contentHeight
 leftMarg, rightMarg = display.screenOriginX, display.contentWidth - display.screenOriginX

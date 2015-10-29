@@ -20,10 +20,12 @@ function scene:create( event )
     group = self.view
 
     bk = display.newImage("images/bk.png",cx, bottomMarg-718)
+    backgroundGroup:insert(bk)
     personaje = display.newSprite(mySheet1, sequenceData)
     personaje:setSequence("parado")
     personaje.x = leftMarg+460
     personaje.y = bottomMarg-899
+    backgroundGroup:insert(personaje)
     rect = display.newImageRect(group,"images/rect.png", display.contentWidth, 604 )
     rect.x, rect.y = cx, bottomMarg-300
     numPagesText = display.newText(group, "DUDU", cx, bottomMarg-560, fontText, 40 )
@@ -36,16 +38,17 @@ function scene:create( event )
         onRelease = go
     }
 
-    playBtn.x, playBtn.y = cx, cy + 300
+    playBtn.x, playBtn.y = cx, bottomMarg - 400
 
     adBtn = widget.newButton
     {   
-        defaultFile = "images/arrow1.png",
-        overFile = "images/arrow2.png",
+        defaultFile = "images/juego1.png",
+        overFile = "images/juego2.png",
        onRelease = showAd
     }
 
-    adBtn.x, adBtn.y = cx, cy + 500
+    adBtn.x, adBtn.y = cx, bottomMarg - 150
+    adBtn:scale(0.8,0.8)
 
     group:insert(playBtn)
     group:insert(adBtn)

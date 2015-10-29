@@ -265,6 +265,7 @@ end
 
 function cleanScene(numSound)
     currScene = composer.getSceneName( "current" )
+    composer.hideOverlay( "scripts.blocked1")
     composer.removeScene( currScene )
 end
 
@@ -283,20 +284,18 @@ function rectBlockTouch2(event)
     return true
 end
 
+blockedDone = false
+
 function blockedPage()
 
     local t = loadTable( "data.json" )
 
     currScene = composer.getSceneName( "current" )
     
-    if t.lock1 and (currScene=="scripts.sonidos4" or currScene=="scripts.sonidos5") then
-        
-        timer.performWithDelay( 1, function()
-            composer.showOverlay( "scripts.blocked1" )
-        end)
-
+    if t.lock1 and (currScene=="scripts.sonidos4" or currScene=="scripts.sonidos5")then
+ 
+        composer.showOverlay( "scripts.blocked1" )
     end
-
 --[[
     if t.lock2 and currScene=="scripts.sonidos6" then
 
