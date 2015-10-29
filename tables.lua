@@ -304,40 +304,10 @@ function blockedPage()
     currScene = composer.getSceneName( "current" )
     
     if t.lock1 and (currScene=="scripts.sonidos4" or currScene=="scripts.sonidos5") then
-
-        --ads:setCurrentProvider( "vungle" )
-
-        rectBlock = display.newImageRect( group, "images/rectBlocked.png", display.contentWidth, 604 )
-        rectBlock.x, rectBlock.y = cx, bottomMarg-300
-        local options = {
-            text = "Comparte la app para desbloquear 16 sonidos más",
-            parent = group,
-            x = cx, 
-            y = bottomMarg-400, 
-            font = fontText,
-            fontSize = 54,
-            width= display.contentWidth-100,
-            align="center"
-        }
-
-        textBlocked = display.newText(options)
-    
-        rectBlock:addEventListener("touch", rectBlockTouch)
-        textBlocked = display.newText(options)
-
-        local shareBtn = widget.newButton
-        {
-            id="share",
-            defaultFile = "images/share1.png",
-            overFile = "images/share2.png",
-            onRelease = onShareButtonReleased
-        }
-
-        -- Center the button
-        shareBtn.x = cx
-        shareBtn.y = bottomMarg - 150
-
-        group:insert(shareBtn)
+        
+        timer.performWithDelay( 1, function()
+            composer.showOverlay( "scripts.blocked1" )
+        end)
 
     end
 

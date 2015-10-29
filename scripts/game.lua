@@ -82,6 +82,7 @@ local function onShareButtonReleased( event )
         local t = loadTable( "data.json" )
         if t.lock1 then
             t.lock1 = false
+            composer.hideOverlay( "scripts.blocked1" )
             saveTable(t, "data.json")
         end
     end
