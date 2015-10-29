@@ -112,6 +112,28 @@ textTable = {
 
 }
 
+spriteOptions = {   
+    height = 820, 
+    width = 768,
+    sheetContentWidth=1536,
+    sheetContentHeight=1640,
+    numFrames = 4, 
+}
+mySheet1 = graphics.newImageSheet("images/burlao1.png", spriteOptions) 
+mySheet2 = graphics.newImageSheet("images/burlao2.png", spriteOptions) 
+mySheet3 = graphics.newImageSheet("images/burlao3.png", spriteOptions) 
+
+sequenceData = {
+    {name = "parado", start = 1, sheet = mySheet1, count = 1, time = 500},
+    {name = "bailoteo1", start = 2, sheet = mySheet1, count = 3, time = 300, loopCount = 1}, 
+    {name = "bailoteo2", start = 1, sheet = mySheet2, count = 4, time = 400, loopCount = 1},
+    {name = "bailoteo3", start = 1, sheet = mySheet3, count = 2, time = 200, loopCount = 1},
+
+    {name = "bailoteo1R", frames = {4,3,2}, sheet = mySheet1, time = 300, loopCount = 1}, 
+    {name = "bailoteo2R", frames = {4,3,2,1}, sheet = mySheet2, count = 4, time = 400, loopCount = 1},
+    {name = "bailoteo3R", frames = {2,1}, sheet = mySheet3, time = 200, loopCount = 1},
+}   
+
 --Sprites botones
 dataBtn = { width=150, height=149, numFrames=2,}
 buttonSheet1 = graphics.newImageSheet( "images/buttonSprite1.png", dataBtn )
@@ -223,7 +245,7 @@ function createPage(numSound, groupName)
                 personaje:play()
                 if numBtn>15 then
                     --ads:setCurrentProvider( "admob" )
-                    ads.show("interstitial", { testMode=true })
+                    ads.show("interstitial", { testMode=false })
                     --ads:setCurrentProvider( "vungle" )
                     numBtn = 0
                 else 
@@ -259,42 +281,6 @@ end
 function rectBlockTouch2(event)
 
     return true
-end
-
-local function onShareButtonReleased( event )
-    local serviceName = event.target.id
-    local isAvailable = native.canShowPopup( "social", serviceName )
-
-    -- If it is possible to show the popup
-    if isAvailable then
-
-        local listener = {}
-        function listener:popup( event )
-            print( "name(" .. event.name .. ") type(" .. event.type .. ") action(" .. tostring(event.action) .. ") limitReached(" .. tostring(event.limitReached) .. ")" )          
-        end
-
-        -- Show the popup
-        native.showPopup( "social",
-        {
-            service = serviceName, -- The service key is ignored on Android.
-            message = "Únete a la pandilla de los Burlaos con la app de Sonidos. Descarga GRATIS:",
-            listener = listener,
-            image = 
-            {
-                { filename = "images/burlao1.png", baseDir = system.ResourceDirectory },
-            },
-            
-            url = { "http://www.burlaos.com", }
-        })
-
-        local t = loadTable( "data.json" )
-        if t.lock1 then
-            t.lock1 = false
-            saveTable(t, "data.json")
-            print("entraaa")
-        end
-
-    end
 end
 
 function blockedPage()

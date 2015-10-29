@@ -24,6 +24,7 @@ settings =
     ["CoronaProvider.ads.vungle"] = {publisherId = "com.vungle"},
     ["CoronaProvider.analytics.flurry"] = {publisherId = "com.coronalabs"},
     ["CoronaProvider.native.popup.social"] = {publisherId = "com.coronalabs"},
-
+    ["plugin.adbuddiz"] = { publisherId = "com.adbuddiz" }
+    
   },  
 }

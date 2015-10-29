@@ -2,27 +2,6 @@ local scene = composer.newScene()
 
 pageNum = 1
 
-    spriteOptions = {   
-        height = 820, 
-        width = 768,
-        sheetContentWidth=1536,
-        sheetContentHeight=1640,
-        numFrames = 4, 
-    }
-    mySheet1 = graphics.newImageSheet("images/burlao1.png", spriteOptions) 
-    mySheet2 = graphics.newImageSheet("images/burlao2.png", spriteOptions) 
-    mySheet3 = graphics.newImageSheet("images/burlao3.png", spriteOptions) 
-
-    sequenceData = {
-        {name = "parado", start = 1, sheet = mySheet1, count = 1, time = 500},
-        {name = "bailoteo1", start = 2, sheet = mySheet1, count = 3, time = 300, loopCount = 1}, 
-        {name = "bailoteo2", start = 1, sheet = mySheet2, count = 4, time = 400, loopCount = 1},
-        {name = "bailoteo3", start = 1, sheet = mySheet3, count = 2, time = 200, loopCount = 1},
-
-        {name = "bailoteo1R", frames = {4,3,2}, sheet = mySheet1, time = 300, loopCount = 1}, 
-        {name = "bailoteo2R", frames = {4,3,2,1}, sheet = mySheet2, count = 4, time = 400, loopCount = 1},
-        {name = "bailoteo3R", frames = {2,1}, sheet = mySheet3, time = 200, loopCount = 1},
-    }   
 
 function swapSheet5()
         personaje:setSequence( "bailoteo1R" )
@@ -55,12 +34,13 @@ end
 end
 
 -- Executed upon touching and releasing the button created below
-local function onShareButtonReleased( event )
+function onShareButtonReleased( event )
     local serviceName = event.target.id
     local isAvailable = native.canShowPopup( "social", serviceName )
 
     -- If it is possible to show the popup
     if isAvailable then
+        share=true
         local listener = {}
         function listener:popup( event )
             print( "name(" .. event.name .. ") type(" .. event.type .. ") action(" .. tostring(event.action) .. ") limitReached(" .. tostring(event.limitReached) .. ")" )          
@@ -77,14 +57,9 @@ local function onShareButtonReleased( event )
                 { filename = "images/burlao1.png", baseDir = system.ResourceDirectory },
             },
             
-            url = { "http://www.burlaos.com", }
+            url = { "https://play.google.com/store/apps/details?id=com.seja.sonidosburlaos", }
         })
-        local t = loadTable( "data.json" )
-        if t.lock1 then
-            t.lock1 = false
-            composer.hideOverlay( "scripts.blocked1" )
-            saveTable(t, "data.json")
-        end
+
     end
 end
 
@@ -92,11 +67,7 @@ function scene:create( event )
 
     local group = self.view
 
-    bk = display.newImage("images/bk.png",cx, bottomMarg-718)
-    personaje = display.newSprite(mySheet1, sequenceData)
-    personaje:setSequence("parado")
-    personaje.x = leftMarg+460
-    personaje.y = bottomMarg-899
+
 	   
     composer.gotoScene( "scripts.sonidos1" )
 
