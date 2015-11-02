@@ -47,6 +47,19 @@ function scene:show( event )
             }
 
             textBlocked = display.newText(options)
+             local options2 = {
+                text = "Comparte la app para desbloquear 16 sonidos más",
+                parent = blockedGroup,
+                x = cx+3, 
+                y = bottomMarg-397, 
+                font = fontText,
+                fontSize = 54,
+                width= display.contentWidth-100,
+                align="center"
+            }
+
+            textBlocked2 = display.newText(options2)
+            textBlocked2:setFillColor(0,0,0)
         
             rectBlock:addEventListener("touch", rectBlockTouch)
             textBlocked = display.newText(options)
