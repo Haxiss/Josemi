@@ -57,7 +57,7 @@ function onShareButtonReleased( event )
                 { filename = "images/promoBurlao2.png", baseDir = system.ResourceDirectory },
             },
             
-            url = { "https://play.google.com/store/apps/details?id=com.seja.sonidosburlaos", }
+            url = { "https://play.google.com/store/apps/details?id=com.masah.burlaossonidos", }
         })
 
     end
