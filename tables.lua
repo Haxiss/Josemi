@@ -1,58 +1,63 @@
 soundTable =  { 
-audio.loadSound("sounds/20_porros_burlaos.ogg"),
-audio.loadSound("sounds/eresUnPayaso.ogg"),
-audio.loadSound("sounds/cara_xupada.ogg"),
-audio.loadSound("sounds/piva_disfruta.ogg"),
-audio.loadSound("sounds/miedo_morir.ogg"),
-audio.loadSound("sounds/estoyBurlao.ogg"),
-audio.loadSound("sounds/isTheJungleNigga.ogg"), 
-audio.loadSound("sounds/maricas_tronista.ogg"),
+"sounds/20_porros_burlaos.mp3",
+"sounds/eresUnPayaso.mp3",
+"sounds/cara_xupada.mp3",
+"sounds/piva_disfruta.mp3",
+"sounds/miedo_morir.mp3",
+"sounds/estoyBurlao.mp3",
+"sounds/isTheJungleNigga.mp3", 
+"sounds/maricas_tronista.mp3",
 
-audio.loadSound("sounds/tiroEnLaRodilla.ogg"),
-audio.loadSound("sounds/meLaSuda.ogg"),
-audio.loadSound("sounds/noMeAcelero.ogg"),
-audio.loadSound("sounds/lol.ogg"),
-audio.loadSound("sounds/profesores_avispao.ogg"),
-audio.loadSound("sounds/miraleElNiggie.ogg"),
-audio.loadSound("sounds/padre_capon.ogg"),
-audio.loadSound("sounds/noSoyUnNiño.ogg"),
+"sounds/tiroEnLaRodilla.mp3",
+"sounds/meLaSuda.mp3",
+"sounds/noMeAcelero.mp3",
+"sounds/lol.mp3",
+"sounds/profesores_avispao.mp3",
+"sounds/miraleElNiggie.mp3",
+"sounds/padre_capon.mp3",
+"sounds/noSoyUnNiño.mp3",
 
-audio.loadSound("sounds/pasmao_atontao.ogg"),
-audio.loadSound("sounds/suerte.ogg"),
-audio.loadSound("sounds/quedasConmigo.ogg"),
-audio.loadSound("sounds/laPutaTele.ogg"),
-audio.loadSound("sounds/nada.ogg"),
-audio.loadSound("sounds/tonto_dios.ogg"),
-audio.loadSound("sounds/vida_mierda.ogg"),
-audio.loadSound("sounds/yoSoyFeliz.ogg"),
+"sounds/pasmao_atontao.mp3",
+"sounds/suerte.mp3",
+"sounds/quedasConmigo.mp3",
+"sounds/laPutaTele.mp3",
+"sounds/nada.mp3",
+"sounds/tonto_dios.mp3",
+"sounds/vida_mierda.mp3",
+"sounds/yoSoyFeliz.mp3",
 
-audio.loadSound("sounds/soysTanBravos.ogg"),
-audio.loadSound("sounds/aquiHayWalthers.ogg"),
-audio.loadSound("sounds/compadre.ogg"),
-audio.loadSound("sounds/calleAguilon9.ogg"),
-audio.loadSound("sounds/conMisNegros.ogg"),
-audio.loadSound("sounds/cuidao.ogg"),
-audio.loadSound("sounds/chivatoDeMierda.ogg"),
-audio.loadSound("sounds/jodidosMaricones.ogg"),
+"sounds/soysTanBravos.mp3",
+"sounds/aquiHayWalthers.mp3",
+"sounds/compadre.mp3",
+"sounds/calleAguilon9.mp3",
+"sounds/conMisNegros.mp3",
+"sounds/cuidao.mp3",
+"sounds/chivatoDeMierda.mp3",
+"sounds/jodidosMaricones.mp3",
 
-audio.loadSound("sounds/dandoVueltas.ogg"),
-audio.loadSound("sounds/envidia_mala.ogg"),
-audio.loadSound("sounds/mierda_no_gusta.ogg"),
-audio.loadSound("sounds/no_esnifo.ogg"),
-audio.loadSound("sounds/noMeSuenas.ogg"),
-audio.loadSound("sounds/pagafantas.ogg"),
-audio.loadSound("sounds/pitbulls.ogg"),
-audio.loadSound("sounds/pivudo.ogg"),
+"sounds/dandoVueltas.mp3",
+"sounds/envidia_mala.mp3",
+"sounds/mierda_no_gusta.mp3",
+"sounds/no_esnifo.mp3",
+"sounds/noMeSuenas.mp3",
+"sounds/pagafantas.mp3",
+"sounds/pitbulls.mp3",
+"sounds/pivudo.mp3",
 
-audio.loadSound("sounds/pajas.ogg"),
-audio.loadSound("sounds/querer.ogg"),
-audio.loadSound("sounds/trapo.ogg"),
-audio.loadSound("sounds/jefe.ogg"),
-audio.loadSound("sounds/guarra.ogg"),
-audio.loadSound("sounds/fuerte.ogg"),
-audio.loadSound("sounds/calentando.ogg"),
-audio.loadSound("sounds/beso.ogg"),
+"sounds/pajas.mp3",
+"sounds/querer.mp3",
+"sounds/trapo.mp3",
+"sounds/jefe.mp3",
+"sounds/guarra.mp3",
+"sounds/fuerte.mp3",
+"sounds/calentando.mp3",
+"sounds/beso.mp3",
 }
+sound = {}
+ for i=1, #soundTable do
+    sound[i]=audio.loadSound( soundTable[i] )
+end
+
 
 textTable = {
 "20 porros",
@@ -198,7 +203,7 @@ function createPage(numSound, groupName)
         
         if i < 5 then 
             btnX = display.contentWidth/4*i-100
-            btnY = bottomMarg-400
+            btnY = bottomMarg-370
         else
             btnX = display.contentWidth/4*(i-4)-100
             btnY = bottomMarg-150
@@ -206,6 +211,13 @@ function createPage(numSound, groupName)
 
         text[i] = display.newText( groupName, textTable[numSound], btnX, btnY+110, fontText, fontTextSize )
         text[i]:setFillColor( 1,1,1 )
+
+        textMessage = display.newText( groupName, "Mantén pulsado para compartir",cx-50, bottomMarg-485, "OpenSans-Regular", 40 )
+        textMessage:setFillColor( 1,1,1 )
+        whatsappLogo = display.newImage( groupName, "images/whatsapp.png", rightMarg-95, bottomMarg-485)
+        whatsappLogo:scale(0.5,0.5)
+        textMessage.isVisible=true
+        whatsappLogo.isVisible=true
         
         if numSound>= 1 and numSound<9 then 
             button[i] = display.newSprite( buttonSheet1, sequenceDataBtn )
@@ -229,6 +241,7 @@ function createPage(numSound, groupName)
         button[i].x, button[i].y = btnX, btnY
 
         button[i].id = numSound
+        button[i]:scale(0.95,0.95)
 
         groupName:insert(button[i])
 
@@ -238,15 +251,28 @@ function createPage(numSound, groupName)
                 audio.pause(backgroundMusicChannel)
                 audio.stop(sonidoChannel)
                 tmrBtnDefault=timer.performWithDelay( 1000, function ( )button[i]:setSequence("default") end )
-            elseif ( event.phase == "ended" )  then
+                manteniendo = false
+                if tmrShare then
+                    timer.cancel( tmrShare )
+                end
+                sonidoShare = soundTable[button[i].id]
+                tmrShare = timer.performWithDelay( 1000, shareSound )
+            elseif ( event.phase == "ended") then
+                timer.cancel( tmrShare )
                 soundPlaying = true
                 button[i]:setSequence("default")
-                personaje:setSequence( "bailoteo1" )
+                
                 cleanTimers()
+<<<<<<< HEAD
                 tmrSwapSprite=timer.performWithDelay( 600, swapSheet )
                 personaje:play()
                 local t = loadTable( "data.json" )
                 if t.numBtn>15 then
+=======
+
+                if numBtn>15 then
+                    --ads:setCurrentProvider( "admob" )
+>>>>>>> origin/master
                     ads.show("interstitial", { testMode=false })
                     t.numBtn = 0
                 else 
@@ -256,14 +282,48 @@ function createPage(numSound, groupName)
                 print(t.numBtn)
                 print( textTable[button[i].id] )
                 analytics.logEvent(textTable[button[i].id])
+                if manteniendo==false then
+                personaje:setSequence( "bailoteo1" )
+                tmrSwapSprite=timer.performWithDelay( 600, swapSheet )
+                personaje:play()
                 audio.pause(backgroundMusicChannel)
-                sonidoChannel= audio.play(soundTable[button[i].id], { onComplete=soundListener})
+                sonidoChannel= audio.play(sound[button[i].id], { onComplete=soundListener})
+                end
             end
         end
-        button[i]:addEventListener("touch",buttonTouch)
-        numSound = numSound + 1
         
+    function shareSound()
+        system.vibrate()
+        if tmrShare then
+            timer.cancel( tmrShare )
+        end
+        manteniendo = true
+        print(sonidoShare)
+        local isAvailable = native.canShowPopup( "social", "share" )
+
+        -- If it is possible to show the popup
+        if isAvailable  then
+           -- shareSoundFlag=true
+            local listener = {}
+            
+            -- Show the popup
+            native.showPopup( "social",
+            {
+                service = "share", -- The service key is ignored on Android.
+                message = "Burlaos Sonidos ¡La app que lo está petando en el barrio! Yo ya me la he descargado",
+                image = 
+                {
+                    { filename = sonidoShare, baseDir = system.ResourceDirectory },
+                },
+                url = { "https://play.google.com/store/apps/details?id=com.masah.burlaossonidos", }
+            })
+        end
     end
+button[i]:addEventListener("touch",buttonTouch)
+numSound = numSound + 1
+
+
+end
 end
 
 function cleanScene(numSound)
@@ -296,9 +356,10 @@ function blockedPage()
     currScene = composer.getSceneName( "current" )
     
     if t.lock1 and (currScene=="scripts.sonidos4" or currScene=="scripts.sonidos5")then
- 
         composer.showOverlay( "scripts.blocked1" )
     end
+
+
 --[[
     if t.lock2 and currScene=="scripts.sonidos6" then
 
