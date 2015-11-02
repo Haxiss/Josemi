@@ -245,15 +245,15 @@ function createPage(numSound, groupName)
                 cleanTimers()
                 tmrSwapSprite=timer.performWithDelay( 600, swapSheet )
                 personaje:play()
-                if numBtn>15 then
-                    --ads:setCurrentProvider( "admob" )
+                local t = loadTable( "data.json" )
+                if t.numBtn>15 then
                     ads.show("interstitial", { testMode=false })
-                    --ads:setCurrentProvider( "vungle" )
-                    numBtn = 0
+                    t.numBtn = 0
                 else 
-                    numBtn = numBtn + 1
+                    t.numBtn = t.numBtn + 1
                 end
-                print(numBtn)
+                saveTable(t, "data.json")
+                print(t.numBtn)
                 print( textTable[button[i].id] )
                 analytics.logEvent(textTable[button[i].id])
                 audio.pause(backgroundMusicChannel)

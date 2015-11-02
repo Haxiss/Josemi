@@ -35,12 +35,12 @@ end
 
 -- Executed upon touching and releasing the button created below
 function onShareButtonReleased( event )
+    share = true
     local serviceName = event.target.id
     local isAvailable = native.canShowPopup( "social", serviceName )
 
     -- If it is possible to show the popup
     if isAvailable then
-        share=true
         local listener = {}
         function listener:popup( event )
             print( "name(" .. event.name .. ") type(" .. event.type .. ") action(" .. tostring(event.action) .. ") limitReached(" .. tostring(event.limitReached) .. ")" )          

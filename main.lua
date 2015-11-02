@@ -7,6 +7,8 @@ analytics = require "analytics"
 ads = require "ads"
 AdBuddiz = require "plugin.adbuddiz"
 
+share = false
+
 blockedGroup = display.newGroup( )
 backgroundGroup = display.newGroup( )
 
@@ -22,10 +24,6 @@ AdBuddiz.RewardedVideo_fetch()
 analytics.init( "6B985RT2R9NWPX88B76W" )
 
 ads.init( "admob", "ca-app-pub-1709584335667681/1378802655" )
-
-numBtn = 0
-
-share = false
 
 function saveTable(t, filename)
     local path = system.pathForFile( filename, system.DocumentsDirectory)
@@ -63,9 +61,17 @@ local t = loadTable( "data.json" )
 	    saveTable(data, "data.json")
 	end
 
+    if not t.numBtn then
+        t.numBtn = 0
+        saveTable(t, "data.json")
+    end
+
+
+
 tables = require "tables"
 
-
+t = os.date( '*t' )
+t0 = os.time( t )
 
 --[[
 function vungleListener(event)
@@ -98,15 +104,28 @@ end
 ]]
 
 function onSystemEvent( event )
-    print( "System event name and type: " .. event.name, event.type )
+    print(event.type)
+    if (event.type=="applicationSuspend") then
+        t = os.date( '*t' )
+        t0 = os.time( t )
+        print(t0)
+    end
+
     if (event.type=="applicationResume" and share) then
-        print ("entrandooo")
-        local t = loadTable( "data.json" )
-        if t.lock1 then
-            t.lock1 = false
-            composer.hideOverlay( "scripts.blocked1" )
-            saveTable(t, "data.json")
+        t = os.date( '*t' )
+        local dif = os.time( t ) - t0
+        print(dif)
+        if dif >= 10 then
+            print("compartido")
+            analytics.logEvent("Compartido")
+            local t = loadTable( "data.json" )
+            if t.lock1 then
+                t.lock1 = false
+                composer.hideOverlay( "scripts.blocked1" )
+                saveTable(t, "data.json")
+            end
         end
+        share = false
     end
 end
 

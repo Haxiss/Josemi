@@ -1,13 +1,14 @@
 local scene = composer.newScene()
 
-
 local function go()
+    analytics.logEvent("Boton Play")
     rect:removeSelf( )
     numPagesText:removeSelf( )
     composer.gotoScene( "scripts.game" )
 end
 
 local function showAd()
+    analytics.logEvent("Boton Anuncio")
     if AdBuddiz.RewardedVideo_isReadyToShow() then
         AdBuddiz.RewardedVideo_show()
     else
