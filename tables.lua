@@ -260,19 +260,11 @@ function createPage(numSound, groupName)
             elseif ( event.phase == "ended") then
                 timer.cancel( tmrShare )
                 soundPlaying = true
-                button[i]:setSequence("default")
-                
+                button[i]:setSequence("default")                
                 cleanTimers()
-<<<<<<< HEAD
-                tmrSwapSprite=timer.performWithDelay( 600, swapSheet )
-                personaje:play()
                 local t = loadTable( "data.json" )
                 if t.numBtn>15 then
-=======
-
-                if numBtn>15 then
                     --ads:setCurrentProvider( "admob" )
->>>>>>> origin/master
                     ads.show("interstitial", { testMode=false })
                     t.numBtn = 0
                 else 
