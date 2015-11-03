@@ -52,26 +52,17 @@ function loadTable(filename)
     return nil
 end
 
-local t = loadTable( "data.json" )
+local t = loadTable( "settings.json" )
 	
 	if t == nil then 
-	    local data = {}
-	    data.lock1 = true
-        data.lock2 = true
-	    saveTable(data, "data.json")
+	    local settings = {}
+	    settings.lock1 = true
+        settings.lock2 = true
+        settings.numBtn = 0
+	    saveTable(settings, "settings.json")
 	end
 
-    if not t.numBtn then
-        t.numBtn = 0
-        saveTable(t, "data.json")
-    end
-
-
-
 tables = require "tables"
-
-t = os.date( '*t' )
-t0 = os.time( t )
 
 --[[
 function vungleListener(event)
@@ -81,20 +72,20 @@ function vungleListener(event)
 
     if event.type=="adView" and currScene=="scripts.sonidos3" then
         rectBlock:removeSelf( )
-        local t = loadTable( "data.json" )
+        local t = loadTable( "settings.json" )
         t.lock1 = false
-        saveTable(t, "data.json")
+        saveTable(t, "settings.json")
     end
 
     if event.type=="adView" and currScene=="scripts.sonidos6" then
         rectBlock:removeSelf( )
-        local t = loadTable( "data.json" )
+        local t = loadTable( "settings.json" )
         t.lock2 = false
-        saveTable(t, "data.json")
+        saveTable(t, "settings.json")
     end
 end
 
-local t = loadTable( "data.json" )
+local t = loadTable( "settings.json" )
 
 if t.lock1==true or t.lock2==true then
     --ads.init( "vungle", "com.seja.liedetector", vungleListener )
@@ -108,21 +99,20 @@ function onSystemEvent( event )
     if (event.type=="applicationSuspend") then
         t = os.date( '*t' )
         t0 = os.time( t )
-        print(t0)
     end
 
     if (event.type=="applicationResume" and share) then
         t = os.date( '*t' )
         local dif = os.time( t ) - t0
-        print(dif)
+        print("Diferencia tiempo: "..dif)
         if dif >= 10 then
             print("compartido")
             analytics.logEvent("Compartido")
-            local t = loadTable( "data.json" )
+            local t = loadTable( "settings.json" )
             if t.lock1 then
                 t.lock1 = false
                 composer.hideOverlay( "scripts.blocked1" )
-                saveTable(t, "data.json")
+                saveTable(t, "settings.json")
             end
         end
         share = false

@@ -53,8 +53,9 @@ soundTable =  {
 "sounds/calentando.mp3",
 "sounds/beso.mp3",
 }
+
 sound = {}
- for i=1, #soundTable do
+for i=1, #soundTable do
     sound[i]=audio.loadSound( soundTable[i] )
 end
 
@@ -262,7 +263,7 @@ function createPage(numSound, groupName)
                 soundPlaying = true
                 button[i]:setSequence("default")                
                 cleanTimers()
-                local t = loadTable( "data.json" )
+                local t = loadTable( "settings.json" )
                 if t.numBtn>15 then
                     --ads:setCurrentProvider( "admob" )
                     ads.show("interstitial", { testMode=false })
@@ -270,8 +271,8 @@ function createPage(numSound, groupName)
                 else 
                     t.numBtn = t.numBtn + 1
                 end
-                saveTable(t, "data.json")
-                print(t.numBtn)
+                saveTable(t, "settings.json")
+                print("Numero click sonidos: "..t.numBtn )
                 print( textTable[button[i].id] )
                 analytics.logEvent(textTable[button[i].id])
                 if manteniendo==false then
@@ -290,11 +291,15 @@ function createPage(numSound, groupName)
             timer.cancel( tmrShare )
         end
         manteniendo = true
-        print(sonidoShare)
+
         local isAvailable = native.canShowPopup( "social", "share" )
 
         -- If it is possible to show the popup
         if isAvailable  then
+
+            print("compartido-"..sonidoShare)
+            analytics.logEvent("share-"..sonidoShare)
+
            -- shareSoundFlag=true
             local listener = {}
             
@@ -311,9 +316,8 @@ function createPage(numSound, groupName)
             })
         end
     end
-button[i]:addEventListener("touch",buttonTouch)
-numSound = numSound + 1
-
+    button[i]:addEventListener("touch",buttonTouch)
+    numSound = numSound + 1
 
 end
 end
@@ -343,7 +347,7 @@ blockedDone = false
 
 function blockedPage()
 
-    local t = loadTable( "data.json" )
+    local t = loadTable( "settings.json" )
 
     currScene = composer.getSceneName( "current" )
     

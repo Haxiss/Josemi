@@ -42,16 +42,12 @@ function onShareButtonReleased( event )
     -- If it is possible to show the popup
     if isAvailable then
         local listener = {}
-        function listener:popup( event )
-            print( "name(" .. event.name .. ") type(" .. event.type .. ") action(" .. tostring(event.action) .. ") limitReached(" .. tostring(event.limitReached) .. ")" )          
-        end
 
         -- Show the popup
         native.showPopup( "social",
         {
             service = serviceName, -- The service key is ignored on Android.
             message = "Burlaos Sonidos ¡La app que lo está petando en el barrio! Yo ya me la he descargado",
-            listener = listener,
             image = 
             {
                 { filename = "images/promoBurlao2.png", baseDir = system.ResourceDirectory },
