@@ -1,5 +1,20 @@
 display.setStatusBar( display.HiddenStatusBar )
 
+--PUSH NOTIFICATIONS
+
+-- This function gets called when the user opens a notification or one is received when the app is open and active.
+-- Change the code below to fit your app's needs.
+function DidReceiveRemoteNotification(message, additionalData, isActive)
+
+end
+
+local OneSignal = require("plugin.OneSignal")
+-- Uncomment SetLogLevel to debug issues.
+-- OneSignal.SetLogLevel(4, 4)
+OneSignal.Init("f732e0e6-822c-11e5-8e07-a0369f2d9328", "764905466316", DidReceiveRemoteNotification)
+
+----------------------------------------------------------------------------------------------------------------------
+
 composer = require "composer"
 json = require "json" 
 widget = require "widget" 
