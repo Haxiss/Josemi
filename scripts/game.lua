@@ -3,35 +3,7 @@ local scene = composer.newScene()
 pageNum = 1
 
 
-function swapSheet5()
-        personaje:setSequence( "bailoteo1R" )
-        personaje:play()
-        tmrSheet5=timer.performWithDelay( 300, swapSheet )
-end
 
-function swapSheet4()
-        personaje:setSequence( "bailoteo2R" )
-        personaje:play()
-        tmrSheet4=timer.performWithDelay( 400, swapSheet5 )
-end
-
-function swapSheet3()
-        personaje:setSequence( "bailoteo3R" )
-        personaje:play()
-        tmrSheet3=timer.performWithDelay( 200, swapSheet4 )
-end
-
-function swapSheet2()
-        personaje:setSequence( "bailoteo3" )
-        personaje:play()
-        tmrSheet2=timer.performWithDelay( 200, swapSheet3 )
-end
-
-    function swapSheet()
-        personaje:setSequence( "bailoteo2" )
-        personaje:play()
-        tmrSheet=timer.performWithDelay( 400, swapSheet2 )
-end
 
 -- Executed upon touching and releasing the button created below
 function onShareButtonReleased( event )
@@ -76,20 +48,20 @@ function scene:create( event )
             if pageNum == 2 then
                 cleanScene(1)
                 arrow2.isVisible = true
-                composer.gotoScene( "scripts.sonidos2", {effect="slideLeft", time=700} )
+                composer.gotoScene( "scripts.sonidos2", {effect="slideLeft", time=250} )
                 elseif pageNum == 3 then
                     cleanScene(9)
-                    composer.gotoScene( "scripts.sonidos3", {effect="slideLeft", time=700} )
+                    composer.gotoScene( "scripts.sonidos3", {effect="slideLeft", time=250} )
                     elseif pageNum == 4 then
                         cleanScene(17)
-                        composer.gotoScene( "scripts.sonidos4", {effect="slideLeft", time=700} )
+                        composer.gotoScene( "scripts.sonidos4", {effect="slideLeft", time=250} )
                         elseif pageNum == 5 then
                             cleanScene(25)
-                            composer.gotoScene( "scripts.sonidos5", {effect="slideLeft", time=700} )
+                            composer.gotoScene( "scripts.sonidos5", {effect="slideLeft", time=250} )
                             arrow1.isVisible = false
                            elseif pageNum == 6 then
                                 cleanScene(33)
-                                composer.gotoScene( "scripts.sonidos6", {effect="slideLeft", time=700} )
+                                composer.gotoScene( "scripts.sonidos6", {effect="slideLeft", time=250} )
                                 arrow1.isVisible = false
             end
             numPagesText.text = pageNum.."/"..pageMax
@@ -116,21 +88,21 @@ function scene:create( event )
 
             if pageNum == 2 then
                 cleanScene(9)
-                composer.gotoScene( "scripts.sonidos1", {effect="slideRight", time=700} )
+                composer.gotoScene( "scripts.sonidos1", {effect="slideRight", time=250} )
                 arrow2.isVisible = false
                 elseif pageNum == 3 then
                     cleanScene(17)
-                    composer.gotoScene( "scripts.sonidos2", {effect="slideRight", time=700} )
+                    composer.gotoScene( "scripts.sonidos2", {effect="slideRight", time=250} )
                     elseif pageNum == 4 then
                         cleanScene(25)
-                        composer.gotoScene( "scripts.sonidos3", {effect="slideRight", time=700} )
+                        composer.gotoScene( "scripts.sonidos3", {effect="slideRight", time=250} )
                         elseif pageNum == 5 then
                             cleanScene(33)
-                            composer.gotoScene( "scripts.sonidos4", {effect="slideRight", time=700} )
+                            composer.gotoScene( "scripts.sonidos4", {effect="slideRight", time=250} )
                             arrow1.isVisible = true
                           elseif pageNum == 6 then
                                 cleanScene(41)
-                                composer.gotoScene( "scripts.sonidos5", {effect="slideRight", time=700} )
+                                composer.gotoScene( "scripts.sonidos5", {effect="slideRight", time=250} )
                                 arrow1.isVisible = true
             end
             pageNum = pageNum - 1

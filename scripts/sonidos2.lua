@@ -25,7 +25,9 @@ function scene:show( event )
     if ( phase == "will" ) then
         -- Called when the scene is still off screen (but is about to come on screen).
 
-
+if compartirFlag then
+ createCompartirText()
+end
 
 
     elseif ( phase == "did" ) then

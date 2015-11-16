@@ -1,17 +1,28 @@
 local scene = composer.newScene()
 
 
-local soundPlaying = false
+
 
 
 function scene:create( event )
 
     group = self.view
 
-    
+    rectExit=display.newCircle( group,rightMarg-58, bottomMarg-1230, 55 )    
+    overlayPuntuar = display.newImage( group,"images/overlayPuntuar.png",cx,cy)
 
-    createPage(41, group)
-    blockedPage()
+    
+    local function rectExitTouch(event)
+        
+        if event.phase == "ended" then
+        
+        overlayPuntuar:removeSelf( )
+        rectExit:removeSelf( )
+        composer.hideOverlay( "scripts.overlayPuntuar" )
+
+        end
+    end
+rectExit:addEventListener("touch",rectExitTouch)
 
 end-- "scene:create()"
 
@@ -25,9 +36,7 @@ function scene:show( event )
     if ( phase == "will" ) then
         -- Called when the scene is still off screen (but is about to come on screen).
 
-if compartirFlag then
- createCompartirText()
-end
+
 
 
     elseif ( phase == "did" ) then

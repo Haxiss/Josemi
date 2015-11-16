@@ -118,6 +118,63 @@ textTable = {
 
 }
 
+spriteTable = {
+"canta",
+"habla",
+"canta",
+"canta",
+"canta",
+"habla",
+"canta",
+"canta",
+
+"habla",
+"canta",
+"canta",
+"canta",
+"canta",
+"canta",
+"canta",
+"habla",
+
+"canta",
+"habla",
+"habla",
+"canta",
+"canta",
+"canta",
+"canta",
+"canta",
+
+"habla",
+"habla",
+"habla",
+"habla",
+"canta",
+"canta",
+"habla",
+"canta",
+
+"habla",
+"canta",
+"canta",
+"canta",
+"canta",
+"canta",
+"canta",
+"habla",
+
+"habla",
+"habla",
+"habla",
+"habla",
+"habla",
+"habla",
+"habla",
+"habla",
+
+
+}
 spriteOptions = {   
     height = 820, 
     width = 768,
@@ -127,7 +184,8 @@ spriteOptions = {
 }
 mySheet1 = graphics.newImageSheet("images/burlao1.png", spriteOptions) 
 mySheet2 = graphics.newImageSheet("images/burlao2.png", spriteOptions) 
-mySheet3 = graphics.newImageSheet("images/burlao3.png", spriteOptions) 
+mySheet3 = graphics.newImageSheet("images/burlao3.png", spriteOptions)
+mySheet4 = graphics.newImageSheet("images/burlaohablando.png", spriteOptions) 
 
 sequenceData = {
     {name = "parado", start = 1, sheet = mySheet1, count = 1, time = 500},
@@ -138,6 +196,8 @@ sequenceData = {
     {name = "bailoteo1R", frames = {4,3,2}, sheet = mySheet1, time = 300, loopCount = 1}, 
     {name = "bailoteo2R", frames = {4,3,2,1}, sheet = mySheet2, count = 4, time = 400, loopCount = 1},
     {name = "bailoteo3R", frames = {2,1}, sheet = mySheet3, time = 200, loopCount = 1},
+    {name = "hablando1", frames = {2,3,4}, sheet = mySheet4, time = 200, loopCount = 1},
+    {name = "hablando2", frames = {4,3,2,1}, sheet = mySheet4, time = 200, loopCount = 1},
 }   
 
 --Sprites botones
@@ -147,7 +207,8 @@ buttonSheet2 = graphics.newImageSheet( "images/buttonSprite2.png", dataBtn )
 buttonSheet3 = graphics.newImageSheet( "images/buttonSprite3.png", dataBtn ) 
 buttonSheet4 = graphics.newImageSheet( "images/buttonSprite4.png", dataBtn ) 
 buttonSheet5 = graphics.newImageSheet( "images/buttonSprite5.png", dataBtn ) 
-buttonSheet6 = graphics.newImageSheet( "images/buttonSprite6.png", dataBtn ) 
+buttonSheet6 = graphics.newImageSheet( "images/buttonSprite6.png", dataBtn )
+
 
 sequenceDataBtn = {
         { name = "default", start=1, count=1, time=125},
@@ -168,6 +229,46 @@ function soundListener()
     soundPlaying = false
     cleanTimers()
 end
+function swapSheet5()
+        personaje:setSequence( "bailoteo1R" )
+        personaje:play()
+        tmrSheet5=timer.performWithDelay( 300, swapSheet )
+end
+
+function swapSheet4()
+        personaje:setSequence( "bailoteo2R" )
+        personaje:play()
+        tmrSheet4=timer.performWithDelay( 400, swapSheet5 )
+end
+
+function swapSheet3()
+        personaje:setSequence( "bailoteo3R" )
+        personaje:play()
+        tmrSheet3=timer.performWithDelay( 200, swapSheet4 )
+end
+
+function swapSheet2()
+        personaje:setSequence( "bailoteo3" )
+        personaje:play()
+        tmrSheet2=timer.performWithDelay( 200, swapSheet3 )
+end
+
+    function swapSheet()
+        personaje:setSequence( "bailoteo2" )
+        personaje:play()
+        tmrSheet=timer.performWithDelay( 400, swapSheet2 )
+end
+
+ function swapSheetH1()
+        personaje:setSequence( "hablando1" )
+        personaje:play()
+        tmrSheetH1=timer.performWithDelay( 400, swapSheetH2 )
+end
+ function swapSheetH2()
+        personaje:setSequence( "hablando2" )
+        personaje:play()
+        tmrSheetH2=timer.performWithDelay( 400, swapSheetH1 )
+end
 
 function cleanTimers()
     if tmrSheet then
@@ -187,6 +288,12 @@ function cleanTimers()
     end 
     if tmrSwapSprite then
         timer.cancel( tmrSwapSprite )
+    end
+    if tmrSheetH1 then
+        timer.cancel(tmrSheetH1)
+    end
+    if tmrSheetH2 then
+        timer.cancel(tmrSheetH2)
     end
 end
 
@@ -276,12 +383,20 @@ function createPage(numSound, groupName)
                 print( textTable[button[i].id] )
                 analytics.logEvent(textTable[button[i].id])
                 if manteniendo==false then
-                personaje:setSequence( "bailoteo1" )
-                tmrSwapSprite=timer.performWithDelay( 600, swapSheet )
-                personaje:play()
+                    if spriteTable[button[i].id]=="habla" then
+                        personaje:setSequence( "hablando1" )
+                        personaje:play()
+                        tmrSwapSpriteH=timer.performWithDelay( 600, swapSheetH2 )
+                        
+
+                    elseif spriteTable[button[i].id]=="canta" then
+                        personaje:setSequence( "bailoteo1" )
+                        tmrSwapSprite=timer.performWithDelay( 600, swapSheet )
+                        personaje:play()
+                    end
+                end
                 audio.pause(backgroundMusicChannel)
                 sonidoChannel= audio.play(sound[button[i].id], { onComplete=soundListener})
-                end
             end
         end
         
@@ -384,3 +499,23 @@ function blockedPage()
     end
 ]]
 end
+
+function createCompartirText()
+   local options = {isModal = true}
+                    composer.showOverlay( "scripts.overlayCompartir", options )
+
+        
+        local function rectExitTouch(event)
+            
+            if event.phase == "ended" then
+            
+            overlayPuntuar:removeSelf( )
+            rectExit:removeSelf( )
+           -- composer.hideOverlay( "scripts.overlayPuntuar" )
+
+            end
+        end
+    rectExit:addEventListener("touch",rectExitTouch)
+end
+
+

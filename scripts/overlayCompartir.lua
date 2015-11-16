@@ -1,17 +1,28 @@
 local scene = composer.newScene()
 
 
-local soundPlaying = false
+
 
 
 function scene:create( event )
 
     group = self.view
 
-    
+   rectExit=display.newCircle( group,rightMarg-58, bottomMarg-10, 55 )    
+    overlayCompartir = display.newImage(group, "images/overlayCompartir.png",cx,bottomMarg-300)
 
-    createPage(41, group)
-    blockedPage()
+    
+    local function overlayCompartirTouch(event)
+        
+        if event.phase == "ended" then
+        
+        overlayCompartir:removeSelf( )
+        rectExit:removeSelf( )
+        composer.hideOverlay( "scripts.overlayCompartir" )
+
+        end
+    end
+overlayCompartir:addEventListener("touch",overlayCompartirTouch)
 
 end-- "scene:create()"
 
@@ -25,9 +36,7 @@ function scene:show( event )
     if ( phase == "will" ) then
         -- Called when the scene is still off screen (but is about to come on screen).
 
-if compartirFlag then
- createCompartirText()
-end
+
 
 
     elseif ( phase == "did" ) then

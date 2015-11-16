@@ -127,6 +127,8 @@ function onSystemEvent( event )
             if t.lock1 then
                 t.lock1 = false
                 composer.hideOverlay( "scripts.blocked1" )
+                local options = {isModal = true}
+                composer.showOverlay( "scripts.overlayCompartir", options )
                 saveTable(t, "settings.json")
             end
         end
